@@ -20,7 +20,6 @@
 /// Rust APIs wrapping libhdfs3 API, providing better semantic and abstraction
 pub mod dfs;
 pub mod err;
-mod hdfs_store;
 /// libhdfs3 raw binding APIs
 pub mod raw;
 pub mod util;

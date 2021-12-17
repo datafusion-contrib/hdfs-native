@@ -15,7 +15,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
-use datafusion::error::DataFusionError;
 use std::io::ErrorKind;
 use thiserror::Error;
 
@@ -45,13 +44,6 @@ fn get_error_kind(e: &HdfsErr) -> ErrorKind {
         HdfsErr::FileAlreadyExists(_) => ErrorKind::AlreadyExists,
         HdfsErr::CannotConnectToNameNode(_) => ErrorKind::ConnectionRefused,
         HdfsErr::InvalidUrl(_) => ErrorKind::AddrNotAvailable,
-    }
-}
-
-impl From<HdfsErr> for DataFusionError {
-    fn from(e: HdfsErr) -> DataFusionError {
-        let transformed_kind = get_error_kind(&e);
-        DataFusionError::IoError(std::io::Error::new(transformed_kind, e))
     }
 }
 
